@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"log"
+	"os"
 	"qa-app/initializers"
 	"qa-app/routers"
 )
@@ -13,8 +16,12 @@ func init() {
 func main() {
 	router := routers.SetupRouter()
 
-	router.Run()
+	port := os.Getenv("PORT")
 
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+	router.Run(fmt.Sprintf(":%s", port))
 }
 
 // package main

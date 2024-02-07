@@ -1,3 +1,5 @@
 go.mod
 .env
 go.sum
+qa-app.exe
+qa-app.exe~

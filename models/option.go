@@ -1,17 +1,18 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
 
-// type Option struct {
-// 	gorm.Model `json:"-"`
-// 	Option     string `json:"option_text"`
-// 	ID         uint   `json:"id" gorm:"primaryKey"`
-// 	IsCorrect  bool   `json:"is_correct"`
-// }
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
 
 type Option struct {
-	gorm.Model `json:"-"`
-	OptionText string `json:"option_text"`
-	IsCorrect  bool   `json:"is_correct"`
-	QuestionID uint   `json:"-"` // This is the foreign key
+	OptionID   uuid.UUID      `json:"option_id" gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
+	CreatedAt  time.Time      `json:"-"`
+	UpdatedAt  time.Time      `json:"-"`
+	DeletedAt  gorm.DeletedAt `gorm:"index" json:"-"`
+	OptionText string         `json:"option_text"`
+	IsCorrect  bool           `json:"-"`
+	QuestionID uuid.UUID      `json:"-" gorm:"type:uuid"` // This is the foreign key
 }
